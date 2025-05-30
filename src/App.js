@@ -10,10 +10,13 @@ import Footer from './components/Footer';
 
 const appStyles = {
   backgroundColor: '#04021a',
-  minHeight: '100vh',
+  minHeight: '100%',
   overflowX: 'hidden',
-  paddingTop: '64px', // push content below fixed navbar
+  // ✅ Remove this line:
+  // overflowY: 'auto',
+  paddingTop: '64px',
 };
+
 
 function App() {
   return (
