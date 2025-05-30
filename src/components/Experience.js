@@ -13,7 +13,7 @@ const Experience = () => {
 
   const experiences = [
     {
-      date: "Feb 2025 - Present",
+      date: "Feb 2025 - June 2025",
       title: "Cyber Security Analyst Intern",
       company: "EyeQDot Net Pvt. Ltd",
       companyColor: "#3B82F6",
