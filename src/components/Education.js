@@ -21,7 +21,7 @@ const roadmap = [
     color: '#06b6d4',
   },
   {
-    year: '2021 - Present',
+    year: '2021 - 2025',
     title: 'BE Computer Science and Engineering',
     subtitle: 'St Joseph Engineering College, Mangalore',
     icon: <FaLaptopCode />,
