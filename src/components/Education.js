@@ -113,6 +113,7 @@ const Education = () => {
       height: '100%',
       zIndex: 0,
       borderRadius: '4px',
+      background: 'linear-gradient(to bottom, #3b82f6, #06b6d4, #8b5cf6, #ef4444)',
     },
     item: {
       position: 'relative',
