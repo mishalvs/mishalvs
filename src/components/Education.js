@@ -36,9 +36,16 @@ const roadmap = [
     reports: '',
     color: '#ef4444',
   },
+  {
+    year: '2025 - Present',
+    title: 'Certified Cybersecurity Professional Plus',
+    subtitle: 'Skill Logic',
+    icon: <FaShieldAlt />,
+    reports: '',
+    color: '#f59e0b',
+  },
 ];
 
-// Child component for each timeline item
 const TimelineItem = ({ item, styles }) => {
   const [ref, inView] = useInView({
     triggerOnce: false,
@@ -104,7 +111,11 @@ const Education = () => {
       left: '30px',
       width: '4px',
       height: '100%',
+<<<<<<< HEAD
       background: 'linear-gradient(to bottom, #3b82f6, #06b6d4, #8b5cf6, #ef4444)',
+=======
+      background: 'linear-gradient(to bottom, #3b82f6, #06b6d4, #8b5cf6, #ef4444, #f59e0b)',
+>>>>>>> da9aa65 (Updated SkillSection with circular layout and animations)
       zIndex: 0,
       borderRadius: '4px',
     },
