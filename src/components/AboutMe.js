@@ -28,8 +28,7 @@ const AboutMe = () => {
               <h2 style={styles.title}>About Me</h2>
               <div style={styles.underline} />
               <p style={styles.paragraph}>
-                I'm <strong>Mishal V S</strong>, a final-year Computer Science &
-                Engineering student at St. Joseph Engineering College, Mangalore. My passion
+                I'm <strong>Mishal V S</strong>, a graduate in Computer Science & Engineering from St. Joseph Engineering College, Mangalore. My passion
                 lies in <strong>cybersecurity</strong> and building secure, efficient systems.
               </p>
               <p style={styles.paragraph}>
