@@ -111,11 +111,6 @@ const Education = () => {
       left: '30px',
       width: '4px',
       height: '100%',
-<<<<<<< HEAD
-      background: 'linear-gradient(to bottom, #3b82f6, #06b6d4, #8b5cf6, #ef4444)',
-=======
-      background: 'linear-gradient(to bottom, #3b82f6, #06b6d4, #8b5cf6, #ef4444, #f59e0b)',
->>>>>>> da9aa65 (Updated SkillSection with circular layout and animations)
       zIndex: 0,
       borderRadius: '4px',
     },
