@@ -6,7 +6,7 @@ import Education from './components/Education';
 import Projects from './components/Projects';
 import SkillsSection from './components/SkillsSection';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
+
 
 const appStyles = {
   backgroundColor: '#04021a',
@@ -26,7 +26,7 @@ function App() {
       <Projects />
       <SkillsSection />
       <Contact />
-      <Footer />
+      
     </div>
   );
 }
