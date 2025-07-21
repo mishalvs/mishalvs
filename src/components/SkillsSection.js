@@ -105,9 +105,16 @@ export default function SkillsSection() {
       color: colors.textPrimary,
       margin: 0,
     },
+
+    categoryTitle: {
+      fontSize: "1.25rem",
+      fontWeight: 700,
+      marginBottom: "1rem",
+      color: colors.textPrimary,
+      textAlign: "center",
+    },
   };
 
-  // Animation variants for each skill card
   const cardVariants = {
     hidden: { opacity: 0, y: 15 },
     visible: { opacity: 1, y: 0 },
