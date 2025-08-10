@@ -6,9 +6,10 @@
   <img src="https://img.shields.io/badge/Ethereum-Dev-3c3c3d?style=for-the-badge&logo=ethereum&logoColor=white"/>
   <img src="https://img.shields.io/badge/Linux-Ninja-4ade80?style=for-the-badge&logo=linux&logoColor=black"/>
   <img src="https://img.shields.io/badge/Next.js-Engineer-black?style=for-the-badge&logo=next.js"/>
-![TryHackMe Badge](https://tryhackme-badges.s3.amazonaws.com/mishalvs.png)
 
 </p>
+<iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4169928" style='border:none;'></iframe>
+
 ---
 
 ## 💣 Projects Arsenal
