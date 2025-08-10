@@ -10,17 +10,6 @@
 
 ---
 
-## 🏅 Certifications
-
-<p align="center">
-  <img src="https://tryhackme-badges.s3.amazonaws.com/mishalvs.png" alt="TryHackMe Linux Fundamentals Badge" width="200" />
-</p>
-<p align="center" style="font-style: italic; color: #4ade80;">
-  Validated Linux skills with the Linux Fundamentals badge on TryHackMe 🐧
-</p>
-
----
-
 ## 💣 Projects Arsenal
 
 | Project             | Description                                                      |
