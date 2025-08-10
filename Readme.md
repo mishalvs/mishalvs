@@ -8,7 +8,6 @@
   <img src="https://img.shields.io/badge/Next.js-Engineer-black?style=for-the-badge&logo=next.js"/>
 
 </p>
-<iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4169928" style='border:none;'></iframe>
 
 ---
 
