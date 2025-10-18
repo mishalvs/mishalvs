@@ -8,7 +8,7 @@ const AboutMe = () => {
 
   const { ref, inView } = useInView({ triggerOnce: false, threshold: 0.1 });
 
-  const pdfUrl = "/Resume.pdf";
+  const pdfUrl = "/Resume- Mishal V S.pdf";
 
   return (
     <>
