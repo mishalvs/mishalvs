@@ -15,12 +15,14 @@ const Navbar = () => {
     { name: 'Contact', icon: <AiOutlineMail /> },
   ];
 
+  // Handle mobile resize
   useEffect(() => {
     const onResize = () => setMobile(window.innerWidth <= 768);
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = open && mobile ? 'hidden' : '';
   }, [open, mobile]);
@@ -46,7 +48,7 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // initialize on load
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navItems]); // ✅ added navItems here
 
   const s = {
     nav: {
@@ -149,8 +151,13 @@ const Navbar = () => {
         <ul style={s.list}>
           {navItems.map((item) => (
             <li key={item.name}>
+              {/* ✅ Added href for accessibility */}
               <a
-                onClick={() => handleClick(item.name)}
+                href={`#${item.name.toLowerCase()}`}
+                onClick={(e) => {
+                  e.preventDefault(); // prevent default anchor behavior
+                  handleClick(item.name);
+                }}
                 style={s.link(active === item.name.toLowerCase())}
               >
                 {item.icon}
