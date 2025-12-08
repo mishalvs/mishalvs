@@ -48,7 +48,7 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // initialize on load
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [navItems]);
+  }, []);
 
   const s = {
     nav: {
