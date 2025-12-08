@@ -1,153 +1,189 @@
-import React, { useState } from "react";
+'use client';
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 
 const AboutMe = () => {
-  const [hoverDownload, setHoverDownload] = useState(false);
+  const [typedText, setTypedText] = useState("");
   const [showPdf, setShowPdf] = useState(false);
 
-  const { ref, inView } = useInView({ triggerOnce: false, threshold: 0.1 });
+  const fullText = `Hi, I’m Mishal V S, a Computer Science & Engineering graduate from St. Joseph Engineering College, Mangalore. I’m an aspiring Cybersecurity Analyst with hands-on experience in vulnerability assessment, penetration testing, and SOC operations. I’ve completed internships at Digitdefence.com and EyeQDotNet Pvt Ltd, gaining exposure to ethical hacking, threat detection, and incident response. I’m skilled in Python, Solidity, Web3.js, and security tools like Burp Suite, Nmap, Metasploit, Wireshark, OWASP ZAP, and OpenVAS. I’m passionate about building secure systems and contributing to proactive defense initiatives in cybersecurity.`;
 
   const pdfUrl = "/Resume- Mishal V S.pdf";
+  const TYPING_SPEED = 30;
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setTypedText(fullText.slice(0, index + 1));
+      index++;
+      if (index === fullText.length) clearInterval(interval);
+    }, TYPING_SPEED);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <>
-      <section id="about" style={{ background: "#fff", padding: "4rem 1rem" }}>
+    <section id="about" style={styles.section}>
+      <div style={styles.container}>
+        {/* MONITOR — Left */}
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 50, borderRadius: "50% 20%" }}
-          animate={inView ? { opacity: 1, y: 0, borderRadius: "10px" } : {}}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          style={{
-            margin: "0 auto",
-            maxWidth: "1100px",
-          }}
+          initial={{ x: -120, rotateY: -15, opacity: 0 }}
+          whileInView={{ x: 0, rotateY: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          style={styles.monitorWrapper}
         >
-          <div style={styles.container}>
-            <div className="about-text" style={styles.textContainer}>
-              <h2 style={styles.title}>About Me</h2>
-              <div style={styles.underline} />
-              <p style={styles.paragraph}>
-                I'm <strong>Mishal V S</strong>, a graduate in Computer Science & Engineering from St. Joseph Engineering College, Mangalore. My passion
-                lies in <strong>cybersecurity</strong> and building secure, efficient systems.
-              </p>
-              <p style={styles.paragraph}>
-                I've completed internships in cybersecurity analysis and frontend development,
-                and hold certifications like <strong>CompTIA Security+</strong> and{" "}
-                <strong>Cisco’s Cybersecurity Path</strong>. I enjoy solving real-world
-                security problems and creating tools that make a difference.
-              </p>
-
-              <div style={styles.buttonRow}>
-                <button
-                  onMouseEnter={() => setHoverDownload(true)}
-                  onMouseLeave={() => setHoverDownload(false)}
-                  onClick={() => setShowPdf(true)}
-                  style={{
-                    ...styles.button,
-                    ...styles.download,
-                    ...(hoverDownload ? styles.buttonHover : {}),
-                  }}
-                >
-                  View CV
-                </button>
-              </div>
-
-              {showPdf && (
-                <div className="pdfViewerContainer">
-                  <button
-                    onClick={() => setShowPdf(false)}
-                    style={styles.closeButton}
-                    aria-label="Close PDF viewer"
-                  >
-                    ✕
-                  </button>
-                  <iframe
-                    src={pdfUrl}
-                    title="CV PDF"
-                    className="pdfIframe"
-                    frameBorder="0"
-                  />
-                </div>
-              )}
+          <div style={styles.monitor}>
+            <div style={styles.terminalHeader}>
+              <span style={{ ...styles.circle, backgroundColor: "#f56565" }} />
+              <span style={{ ...styles.circle, backgroundColor: "#ecc94b" }} />
+              <span style={{ ...styles.circle, backgroundColor: "#48bb78" }} />
             </div>
-
-            <div className="about-image" style={styles.imageWrapper}>
-              <div style={styles.blueFrame} />
-              <img src="/photos/About_Me.jpg" alt="About" style={styles.image} />
+            <div style={styles.terminalBody}>
+              <p style={styles.terminalText}>
+                {typedText}
+                <span className="cursor">|</span>
+              </p>
             </div>
           </div>
+
+          <button
+            style={styles.resumeButton}
+            onClick={() => setShowPdf(!showPdf)}
+          >
+            {showPdf ? "Hide Resume" : "View Resume"}
+          </button>
+
+          {showPdf && (
+            <div style={styles.pdfContainerInline}>
+              <iframe src={pdfUrl} title="CV PDF" style={styles.pdfIframeInline} />
+            </div>
+          )}
         </motion.div>
-      </section>
 
-      <style>{`
-        .pdfViewerContainer {
-          margin-top: 2rem;
-          position: relative;
-          width: 100%;
-          max-width: 900px;
-          height: 70vh;
-          border: 1px solid #ccc;
-          border-radius: 12px;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
-        .pdfIframe {
-          width: 100%;
-          height: 100%;
-          border: none;
-        }
+        {/* PHOTO — Right */}
+        <motion.div
+          initial={{ x: 120, rotateY: 15, opacity: 0 }}
+          whileInView={{ x: 0, rotateY: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          style={styles.photoWrapper}
+        >
+          <div style={styles.photoFrame} />
+          <img src="/photos/About_me.png" alt="About Me" style={styles.photo} />
+        </motion.div>
+      </div>
 
-        @media (max-width: 768px) {
-          .about-text {
-            order: 2;
-            width: 100%;
+      {/* Cursor animation CSS */}
+      <style>
+        {`
+          .cursor {
+            display: inline-block;
+            width: 1ch;
+            background-color: #00ff9c;
+            margin-left: 2px;
+            animation: blink 1s step-start infinite;
           }
-          .about-image {
-            order: 1;
-            width: 100%;
-            height: auto;
+          @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0; }
           }
-          .about-image img {
-            width: 100%;
-            height: auto;
-          }
-          .pdfViewerContainer {
-            height: 50vh;
-          }
-        }
-      `}</style>
-    </>
+        `}
+      </style>
+    </section>
   );
 };
 
 const styles = {
+  section: {
+    background: "#111111ff",
+    padding: "4rem 2rem",
+  },
   container: {
-    maxWidth: "1100px",
-    margin: "0 auto",
     display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
     justifyContent: "space-between",
     gap: "2rem",
+    maxWidth: "1100px",
+    margin: "0 auto",
+    flexWrap: "wrap",
+    perspective: "1000px",
   },
-  imageWrapper: {
-    position: "relative",
-    width: "280px",
-    height: "370px",
+  monitorWrapper: {
+    flex: 1,
+    minWidth: "300px",
+  },
+  monitor: {
+    backgroundColor: "#1e1e1e",
+    borderRadius: "12px",
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+    height: "360px",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
+  },
+  terminalHeader: {
+    display: "flex",
+    gap: "0.5rem",
+    padding: "0.5rem",
+    backgroundColor: "#2d2d2d",
+  },
+  circle: {
+    width: "12px",
+    height: "12px",
+    borderRadius: "50%",
+  },
+  terminalBody: {
+    padding: "1rem",
+    flex: 1,
+    overflowY: "auto",
+  },
+  terminalText: {
+    color: "#00ff9c",
+    fontFamily: "monospace",
+    fontSize: "0.95rem",
+    whiteSpace: "pre-wrap",
+    margin: 0,
+    lineHeight: 1.5,
+  },
+  resumeButton: {
+    marginTop: "1rem",
+    padding: "0.6rem 1.8rem",
+    backgroundColor: "#3b82f6",
+    color: "#fff",
+    border: "none",
+    borderRadius: "9999px",
+    cursor: "pointer",
+    fontWeight: 600,
+  },
+  pdfContainerInline: {
+    marginTop: "1rem",
+    width: "100%",
+    height: "500px",
+    borderRadius: "12px",
+    overflow: "hidden",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
+  },
+  pdfIframeInline: {
+    width: "100%",
+    height: "100%",
+    border: "none",
+  },
+  photoWrapper: {
     flexShrink: 0,
+    width: "370px",
+    height: "390px",
+    position: "relative",
   },
-  blueFrame: {
+  photoFrame: {
     position: "absolute",
-    top: "20px",
-    left: "20px",
+    top: 0,
+    left: 0,
     width: "100%",
     height: "100%",
     border: "4px solid #3B82F6",
     borderRadius: "12px",
     zIndex: 1,
   },
-  image: {
+  photo: {
     position: "absolute",
     top: 0,
     left: 0,
@@ -155,64 +191,7 @@ const styles = {
     height: "100%",
     objectFit: "cover",
     borderRadius: "12px",
-    boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
     zIndex: 2,
-  },
-  textContainer: {
-    flex: 1,
-    maxWidth: "600px",
-  },
-  title: {
-    fontSize: "2rem",
-    fontWeight: "700",
-    color: "#111827",
-    marginBottom: "0.25rem",
-  },
-  underline: {
-    width: "50px",
-    height: "4px",
-    backgroundColor: "#3B82F6",
-    marginBottom: "1.2rem",
-  },
-  paragraph: {
-    fontSize: "1rem",
-    lineHeight: "1.7",
-    color: "#374151",
-    marginBottom: "1rem",
-  },
-  buttonRow: {
-    marginTop: "1.5rem",
-    display: "flex",
-    gap: "1rem",
-  },
-  button: {
-    padding: "0.6rem 1.8rem",
-    fontSize: "1rem",
-    fontWeight: "600",
-    borderRadius: "9999px",
-    border: "none",
-    cursor: "pointer",
-    backgroundColor: "#e5e7eb",
-    color: "#111827",
-    transition: "background-color 0.3s ease",
-  },
-  download: {
-    backgroundColor: "#3B82F6",
-    color: "#fff",
-  },
-  buttonHover: {
-    backgroundColor: "#2563eb",
-  },
-  closeButton: {
-    position: "absolute",
-    top: "8px",
-    right: "8px",
-    background: "transparent",
-    border: "none",
-    fontSize: "1.5rem",
-    cursor: "pointer",
-    color: "#333",
-    zIndex: 10,
   },
 };
 
