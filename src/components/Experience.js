@@ -1,179 +1,134 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+'use client';
+import React from "react";
+import { motion, useViewportScroll } from "framer-motion";
+
+const experiences = [
+  {
+    date: "Jul 2025 - Oct 2025",
+    title: "Cyber Security Intern",
+    company: "Digitdefence.com",
+    companyUrl: "https://digitdefence.com",
+    companyColor: "#3B82F6",
+    description: "Worked on cybersecurity domains including vulnerability assessment, incident response, and ethical hacking"  },
+  {
+    date: "Feb 2025 - June 2025",
+    title: "Cyber Security Analyst Intern",
+    company: "EyeQDot Net Pvt. Ltd",
+    companyUrl: "https://eyeqdotnet.com",
+    companyColor: "#3B82F6",
+    description:
+      "Identified and mitigated security threats, analyzed systems, and collaborated with teams to improve overall defense.",
+  },
+  {
+    date: "Oct 2023 - Nov 2023",
+    title: "Front-End Web Developer Intern",
+    company: "Motion Cut Video Studio",
+    companyUrl: "https://motioncut.in/",
+    companyColor: "#3B82F6",
+    description:
+      "Built responsive web interfaces using HTML, CSS, and JavaScript. Ensured seamless UX and cross-browser compatibility.",
+  },
+];
+
+const Particle = ({ size = "8px", color = "#3B82F6", x = "0%", y = "0%", duration = 5, delay = 0 }) => (
+  <motion.div
+    style={{
+      position: 'absolute',
+      width: size,
+      height: size,
+      borderRadius: '50%',
+      backgroundColor: color,
+      top: y,
+      left: x,
+      zIndex: 0,
+      pointerEvents: 'none',
+    }}
+    animate={{
+      y: [0, -20, 0],
+      x: [0, 10, -10, 0],
+      opacity: [0.5, 1, 0.5]
+    }}
+    transition={{
+      duration,
+      delay,
+      repeat: Infinity,
+      repeatType: "reverse",
+      ease: "easeInOut",
+    }}
+  />
+);
 
 const Experience = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const { scrollYProgress } = useViewportScroll();
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const experiences = [
-    {
-      date: "Feb 2025 - June 2025",
-      title: "Cyber Security Analyst Intern",
-      company: "EyeQDot Net Pvt. Ltd",
-      companyColor: "#3B82F6",
-      description:
-        "Identified and mitigated security threats, analyzed systems, and collaborated with teams to improve overall defense.",
-    },
-    {
-      date: "Oct 2023 - Nov 2023",
-      title: "Front-End Web Developer Intern",
-      company: "Motion Cut Video Studio",
-      companyColor: "#3B82F6",
-      description:
-        "Built responsive web interfaces using HTML, CSS, and JavaScript. Ensured seamless UX and cross-browser compatibility.",
-    },
-  ];
-
-  // Declare a separate hook for each experience manually
-  const [ref1, inView1] = useInView({ triggerOnce: false, threshold: 0.2 });
-  const [ref2, inView2] = useInView({ triggerOnce: false, threshold: 0.2 });
-
-  const refs = [ref1, ref2];
-  const inViews = [inView1, inView2];
-
-  const styles = {
-    section: {
-      display: "flex",
-      flexWrap: "wrap",
-      backgroundColor: "#f9fafb",
-      color: "#111827",
-      padding: "4rem 2rem",
-      justifyContent: "space-between",
-      alignItems: "center",
-      flexDirection: isMobile ? "column" : "row",
-      maxWidth: "100%",
-      margin: "0 auto",
-    },
-    left: {
-      flex: 1,
-      minWidth: isMobile ? "100%" : "60%",
-      paddingRight: isMobile ? 0 : "2rem",
-      textAlign: "left",
-    },
-    right: {
-      flex: 1,
-      minWidth: isMobile ? "100%" : "35%",
-      marginTop: isMobile ? "2rem" : 0,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    image: {
-      maxWidth: "100%",
-      borderRadius: "1rem",
-      marginTop: "160px",
-      height: "auto",
-      boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
-    },
-    subTitle: {
-      color: "#3B82F6",
-      fontSize: "1rem",
-      fontWeight: "600",
-      marginBottom: "0.5rem",
-      textTransform: "uppercase",
-      letterSpacing: "1px",
-    },
-    title: {
-      fontSize: "2rem",
-      fontWeight: "700",
-      marginBottom: "1rem",
-      color: "#111827",
-    },
-    description: {
-      fontSize: "1rem",
-      color: "#374151",
-      marginBottom: "2rem",
-    },
-    card: {
-      backgroundColor: "#ffffff",
-      borderRadius: "1rem",
-      padding: "1.2rem 1.5rem",
-      marginBottom: "1.5rem",
-      border: "1px solid #e5e7eb",
-      boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-      transition: "transform 0.3s ease, box-shadow 0.3s ease",
-    },
-    date: {
-      color: "#3B82F6",
-      fontWeight: "600",
-      fontSize: "0.9rem",
-      marginBottom: "0.3rem",
-    },
-    cardTitle: {
-      fontSize: "1.2rem",
-      fontWeight: "bold",
-      margin: "0.3rem 0",
-      color: "#111827",
-    },
-    company: {
-      fontSize: "1rem",
-      fontWeight: "500",
-      marginBottom: "0.5rem",
-    },
-    cardDescription: {
-      fontSize: "0.95rem",
-      color: "#374151",
-    },
-  };
+  const particleConfigs = Array.from({ length: 12 }).map(() => ({
+    size: `${Math.random() * 10 + 4}px`,
+    color: ["#00c3ff", "#ff3d67", "#00ff7f", "#ffaa00", "#ffffff"][Math.floor(Math.random() * 5)],
+    x: `${Math.random() * 100}%`,
+    y: `${Math.random() * 100}%`,
+    duration: Math.random() * 6 + 3,
+    delay: Math.random() * 3
+  }));
 
   return (
-    <section id="experience">
-      <div style={styles.section}>
-        <div style={styles.left}>
+    <section id="Experience" style={{ position: "relative", background: "#111111ff", color: "#fff", padding: "4rem 2rem", overflow: "hidden" }}>
+      {particleConfigs.map((p, i) => <Particle key={i} {...p} />)}
+
+      <motion.div
+        style={{ maxWidth: "1000px", margin: "0 auto", zIndex: 1 }}
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <h4 style={{ color: "#3B82F6", fontSize: "1rem", fontWeight: 600, marginBottom: "0.5rem", textTransform: "uppercase", letterSpacing: "1px" }}>Experience</h4>
+        <h2 style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "1rem" }}>What I've Worked On</h2>
+        <p style={{ fontSize: "1rem", color: "#ccc", marginBottom: "2rem" }}>
+          Real-world experience in both cybersecurity and front-end development, blending technical expertise with teamwork and problem-solving.
+        </p>
+      </motion.div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: "900px", margin: "0 auto", zIndex: 1 }}>
+        {experiences.map((exp, idx) => (
           <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            key={idx}
+            initial={{ opacity: 0, y: 50, rotateY: -5 }}
+            whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: idx * 0.2 }}
+            whileHover={{ y: -5, scale: 1.02, boxShadow: "0 10px 25px rgba(0,0,0,0.3)" }}
+            style={{
+              backgroundColor: "#1e1e1e",
+              borderRadius: "12px",
+              padding: "1.5rem",
+              border: `1px solid #333`,
+              boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
+              position: "relative",
+              overflow: "hidden",
+            }}
           >
-            <h4 style={styles.subTitle}>Experience</h4>
-            <h2 style={styles.title}>What I've Worked On</h2>
-            <p style={styles.description}>
-              Real-world experience in both cybersecurity and front-end development,
-              blending technical expertise with teamwork and problem-solving.
-            </p>
-          </motion.div>
-
-          {experiences.map((exp, idx) => (
+            {/* Animated line */}
             <motion.div
-              key={idx}
-              ref={refs[idx]}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inViews[idx] ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: idx * 0.2 }}
-              whileHover={{
-                y: -4,
-                boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
+              initial={{ width: 0 }}
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.5 }}
+              style={{
+                height: "2px",
+                backgroundColor: exp.companyColor,
+                position: "absolute",
+                bottom: 0,
+                left: 0,
               }}
-              style={styles.card}
-            >
-              <p style={styles.date}>{exp.date}</p>
-              <h3 style={styles.cardTitle}>{exp.title}</h3>
-              <p style={{ ...styles.company, color: exp.companyColor }}>{exp.company}</p>
-              <p style={styles.cardDescription}>{exp.description}</p>
-            </motion.div>
-          ))}
-        </div>
+            />
 
-        <motion.div
-          style={styles.right}
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <img
-            src="/photos/Work.png"
-            alt="Experience Illustration"
-            style={styles.image}
-          />
-        </motion.div>
+            <p style={{ color: exp.companyColor, fontWeight: 600, fontSize: "0.9rem", marginBottom: "0.3rem" }}>{exp.date}</p>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "0.5rem" }}>{exp.title}</h3>
+            <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: "1rem", fontWeight: 500, marginBottom: "0.5rem", color: exp.companyColor, textDecoration: "underline" }}>
+              {exp.company}
+            </a>
+            <p style={{ fontSize: "0.95rem", color: "#ccc", lineHeight: 1.6 }}>{exp.description}</p>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
