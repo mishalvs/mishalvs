@@ -1,9 +1,10 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import { AiFillHome, AiOutlineUser, AiOutlineBook, AiOutlineExperiment, AiOutlineProject, AiOutlineMail } from 'react-icons/ai';
 
 const Navbar = () => {
   const [active, setActive] = useState('home');
-  const [mobile, setMobile] = useState(window.innerWidth <= 768);
+  const [mobile, setMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
   const [open, setOpen] = useState(false);
 
   const navItems = [
@@ -31,7 +32,6 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY + window.innerHeight / 2;
-
       for (const item of navItems) {
         const section = document.getElementById(item.name.toLowerCase());
         if (section) {
@@ -48,7 +48,7 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // initialize on load
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [navItems]); // ✅ added navItems here
+  }, [navItems]);
 
   const s = {
     nav: {
@@ -124,9 +124,7 @@ const Navbar = () => {
   const handleClick = (name) => {
     setActive(name.toLowerCase());
     const section = document.getElementById(name.toLowerCase());
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (section) section.scrollIntoView({ behavior: 'smooth' });
     if (mobile) setOpen(false);
   };
 
@@ -151,11 +149,10 @@ const Navbar = () => {
         <ul style={s.list}>
           {navItems.map((item) => (
             <li key={item.name}>
-              {/* ✅ Added href for accessibility */}
               <a
                 href={`#${item.name.toLowerCase()}`}
                 onClick={(e) => {
-                  e.preventDefault(); // prevent default anchor behavior
+                  e.preventDefault();
                   handleClick(item.name);
                 }}
                 style={s.link(active === item.name.toLowerCase())}
