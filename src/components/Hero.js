@@ -62,7 +62,7 @@ const SubheadingCycler = ({ scrollYProgress }) => {
   useEffect(() => {
     const timer = setInterval(() => setIndex(prev => (prev + 1) % roles.length), TIMING.SUBHEADING_CYCLE_INTERVAL);
     return () => clearInterval(timer);
-  }, [roles.length]);
+  }, []);
 
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
@@ -199,8 +199,6 @@ const Hero = () => {
             style={linkStyle}
             target="_blank"
             rel="noopener noreferrer"
-            onMouseEnter={e => e.currentTarget.style.color = "#ff3d67"}
-            onMouseLeave={e => e.currentTarget.style.color = "#00c3ff"}
           >
             LinkedIn
           </a>
@@ -209,8 +207,6 @@ const Hero = () => {
             style={linkStyle}
             target="_blank"
             rel="noopener noreferrer"
-            onMouseEnter={e => e.currentTarget.style.color = "#ff3d67"}
-            onMouseLeave={e => e.currentTarget.style.color = "#00c3ff"}
           >
             GitHub
           </a>
