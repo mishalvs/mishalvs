@@ -1,7 +1,8 @@
+'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaGraduationCap, FaLaptopCode, FaShieldAlt } from 'react-icons/fa';
+import { FaGraduationCap, FaLaptopCode, FaShieldAlt, FaAws } from 'react-icons/fa';
 
 const roadmap = [
   {
@@ -9,7 +10,6 @@ const roadmap = [
     title: 'High School',
     subtitle: 'St Norbert CBSE School, Chikmagaluru',
     icon: <FaGraduationCap />,
-    reports: '',
     color: '#3b82f6',
   },
   {
@@ -17,7 +17,6 @@ const roadmap = [
     title: 'Higher Secondary',
     subtitle: 'St Norbert PU College, Chikmagaluru',
     icon: <FaGraduationCap />,
-    reports: '',
     color: '#06b6d4',
   },
   {
@@ -25,24 +24,28 @@ const roadmap = [
     title: 'BE Computer Science and Engineering',
     subtitle: 'St Joseph Engineering College, Mangalore',
     icon: <FaLaptopCode />,
-    reports: '',
     color: '#8b5cf6',
   },
   {
-    year: '2024 - Present',
+    year: '2024 - 2025',
     title: 'Cyber Security Technician',
     subtitle: 'EC Council Certification',
     icon: <FaShieldAlt />,
-    reports: '',
     color: '#ef4444',
   },
   {
-    year: '2025 - Present',
+    year: 'July 2025 - Oct 2025',
     title: 'Certified Cybersecurity Professional Plus',
     subtitle: 'Skill Logic',
     icon: <FaShieldAlt />,
-    reports: '',
     color: '#f59e0b',
+  },
+  {
+    year: 'Dec 2025 - Present',
+    title: 'AWS with DevOps',
+    subtitle: 'Inventateq',
+    icon: <FaAws />,
+    color: '#ff9900',
   },
 ];
 
@@ -68,7 +71,6 @@ const TimelineItem = ({ item, styles }) => {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        {item.reports && <div style={styles.reports}>Reports {item.reports}</div>}
         <div style={styles.label}>{item.title}</div>
         <div style={styles.year}>{item.year}</div>
         <div style={styles.subtitleText}>{item.subtitle}</div>
@@ -81,7 +83,8 @@ const Education = () => {
   const styles = {
     section: {
       padding: '4rem 1rem',
-      background: '#f9fafb',
+      background: '#111111',
+      color: '#fff',
     },
     header: {
       textAlign: 'center',
@@ -90,10 +93,11 @@ const Education = () => {
     title: {
       fontSize: '2rem',
       fontWeight: 700,
+      color: '#00c3ff',
     },
     subtitle: {
       fontSize: '1rem',
-      color: '#6b7280',
+      color: '#9ca3af',
     },
     roadmapContainer: {
       display: 'flex',
@@ -113,7 +117,7 @@ const Education = () => {
       height: '100%',
       zIndex: 0,
       borderRadius: '4px',
-      background: 'linear-gradient(to bottom, #3b82f6, #06b6d4, #8b5cf6, #ef4444)',
+      background: 'linear-gradient(to bottom, #00c3ff, #3b82f6, #8b5cf6, #ef4444, #f59e0b, #ff9900)',
     },
     item: {
       position: 'relative',
@@ -139,25 +143,23 @@ const Education = () => {
       justifyContent: 'center',
       fontSize: '24px',
       zIndex: 2,
-      boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+      boxShadow: '0 0 15px rgba(0,0,0,0.2)',
     }),
     textBox: {
-      backgroundColor: '#fff',
+      backgroundColor: '#1e1e1e',
       padding: '1rem',
-      borderRadius: '10px',
-      boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+      borderRadius: '12px',
+      boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
       width: '100%',
-    },
-    reports: {
-      color: '#6b7280',
-      fontSize: '0.9rem',
-      marginBottom: '0.5rem',
+      borderLeft: '4px solid #00c3ff',
+      transition: 'transform 0.3s, box-shadow 0.3s',
+      cursor: 'pointer',
     },
     label: {
       fontWeight: 600,
       marginBottom: '0.2rem',
       fontSize: '1.2rem',
-      color: '#111827',
+      color: '#fff',
     },
     year: {
       fontSize: '0.9rem',
@@ -166,10 +168,10 @@ const Education = () => {
     },
     subtitleText: {
       fontSize: '1rem',
-      color: '#6b7280',
+      color: '#d1d5db',
     },
     subTitle: {
-      color: '#3B82F6',
+      color: '#00c3ff',
       fontSize: '1rem',
       fontWeight: '600',
       marginBottom: '0.5rem',
@@ -182,8 +184,8 @@ const Education = () => {
     <section id="education" style={styles.section}>
       <div style={styles.header}>
         <h4 style={styles.subTitle}>Education</h4>
-        <h2 style={styles.title}>📈 Academic Growth Journey</h2>
-        <p style={styles.subtitle}>My education visualized over time</p>
+        <h2 style={styles.title}>📈 Academic & Skill Growth</h2>
+        <p style={styles.subtitle}>My learning journey over the years</p>
       </div>
 
       <div style={styles.roadmapContainer}>
