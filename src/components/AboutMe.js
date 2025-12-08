@@ -1,198 +1,220 @@
-'use client';
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { FaEnvelope, FaLinkedin, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const AboutMe = () => {
-  const [typedText, setTypedText] = useState("");
-  const [showPdf, setShowPdf] = useState(false);
-
-  const fullText = `Hi, I’m Mishal V S, a Computer Science & Engineering graduate from St. Joseph Engineering College, Mangalore. I’m an aspiring Cybersecurity Analyst with hands-on experience in vulnerability assessment, penetration testing, and SOC operations. I’ve completed internships at Digitdefence.com and EyeQDotNet Pvt Ltd, gaining exposure to ethical hacking, threat detection, and incident response. I’m skilled in Python, Solidity, Web3.js, and security tools like Burp Suite, Nmap, Metasploit, Wireshark, OWASP ZAP, and OpenVAS. I’m passionate about building secure systems and contributing to proactive defense initiatives in cybersecurity.`;
-
-  const pdfUrl = "/Resume- Mishal V S.pdf";
-  const TYPING_SPEED = 30;
-
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      setTypedText(fullText.slice(0, index + 1));
-      index++;
-      if (index === fullText.length) clearInterval(interval);
-    }, TYPING_SPEED);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <section id="about" style={styles.section}>
-      <div style={styles.container}>
-        {/* MONITOR — Left */}
-        <motion.div
-          initial={{ x: -120, rotateY: -15, opacity: 0 }}
-          whileInView={{ x: 0, rotateY: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          style={styles.monitorWrapper}
-        >
-          <div style={styles.monitor}>
-            <div style={styles.terminalHeader}>
-              <span style={{ ...styles.circle, backgroundColor: "#f56565" }} />
-              <span style={{ ...styles.circle, backgroundColor: "#ecc94b" }} />
-              <span style={{ ...styles.circle, backgroundColor: "#48bb78" }} />
-            </div>
-            <div style={styles.terminalBody}>
-              <p style={styles.terminalText}>
-                {typedText}
-                <span className="cursor">|</span>
-              </p>
-            </div>
-          </div>
-
-          <button
-            style={styles.resumeButton}
-            onClick={() => setShowPdf(!showPdf)}
-          >
-            {showPdf ? "Hide Resume" : "View Resume"}
-          </button>
-
-          {showPdf && (
-            <div style={styles.pdfContainerInline}>
-              <iframe src={pdfUrl} title="CV PDF" style={styles.pdfIframeInline} />
-            </div>
-          )}
-        </motion.div>
-
-        {/* PHOTO — Right */}
-        <motion.div
-          initial={{ x: 120, rotateY: 15, opacity: 0 }}
-          whileInView={{ x: 0, rotateY: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          style={styles.photoWrapper}
-        >
-          <div style={styles.photoFrame} />
-          <img src="/photos/About_me.png" alt="About Me" style={styles.photo} />
-        </motion.div>
-      </div>
-
-      {/* Cursor animation CSS */}
-      <style>
-        {`
-          .cursor {
-            display: inline-block;
-            width: 1ch;
-            background-color: #00ff9c;
-            margin-left: 2px;
-            animation: blink 1s step-start infinite;
-          }
-          @keyframes blink {
-            0%, 50%, 100% { opacity: 1; }
-            25%, 75% { opacity: 0; }
-          }
-        `}
-      </style>
-    </section>
-  );
+// Defined for a personal portfolio
+const personalDetails = {
+    email: "mishalvs211003@gmail.com", 
+    // Using your provided social links
+    socials: [
+        { icon: <FaTwitter />, link: "https://twitter.com/your_handle" }, // Placeholder Twitter (add your actual link)
+        { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/mishalvs" },
+        { icon: <FaGithub />, link: "https://github.com/mishalvs" },
+        { icon: <FaInstagram />, link: "https://instagram.com/_mishal_vs_" },
+    ],
 };
 
-const styles = {
-  section: {
-    background: "#111111ff",
-    padding: "4rem 2rem",
-  },
-  container: {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: "2rem",
-    maxWidth: "1100px",
-    margin: "0 auto",
-    flexWrap: "wrap",
-    perspective: "1000px",
-  },
-  monitorWrapper: {
-    flex: 1,
-    minWidth: "300px",
-  },
-  monitor: {
-    backgroundColor: "#1e1e1e",
-    borderRadius: "12px",
-    overflow: "hidden",
-    display: "flex",
-    flexDirection: "column",
-    height: "360px",
-    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
-  },
-  terminalHeader: {
-    display: "flex",
-    gap: "0.5rem",
-    padding: "0.5rem",
-    backgroundColor: "#2d2d2d",
-  },
-  circle: {
-    width: "12px",
-    height: "12px",
-    borderRadius: "50%",
-  },
-  terminalBody: {
-    padding: "1rem",
-    flex: 1,
-    overflowY: "auto",
-  },
-  terminalText: {
-    color: "#00ff9c",
-    fontFamily: "monospace",
-    fontSize: "0.95rem",
-    whiteSpace: "pre-wrap",
-    margin: 0,
-    lineHeight: 1.5,
-  },
-  resumeButton: {
-    marginTop: "1rem",
-    padding: "0.6rem 1.8rem",
-    backgroundColor: "#3b82f6",
-    color: "#fff",
-    border: "none",
-    borderRadius: "9999px",
-    cursor: "pointer",
-    fontWeight: 600,
-  },
-  pdfContainerInline: {
-    marginTop: "1rem",
-    width: "100%",
-    height: "500px",
-    borderRadius: "12px",
-    overflow: "hidden",
-    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
-  },
-  pdfIframeInline: {
-    width: "100%",
-    height: "100%",
-    border: "none",
-  },
-  photoWrapper: {
-    flexShrink: 0,
-    width: "370px",
-    height: "390px",
-    position: "relative",
-  },
-  photoFrame: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    border: "4px solid #3B82F6",
-    borderRadius: "12px",
-    zIndex: 1,
-  },
-  photo: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    borderRadius: "12px",
-    zIndex: 2,
-  },
+const colors = {
+    bgPrimary: "#111111ff", 
+    textPrimary: "#ffffff",
+    accent: "#ffffff", 
+    textSecondary: "#aaaaaa",
 };
 
-export default AboutMe;
+export default function ContactSection() {
+    const styles = {
+        wrapper: {
+            backgroundColor: colors.bgPrimary,
+            padding: "8rem 2rem 1rem", 
+            color: colors.textPrimary,
+            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+            position: "relative",
+            minHeight: "80vh", // Adjusted height since we removed location blocks
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+        },
+        // --- Main Content Area ---
+        mainContent: {
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            alignItems: "center", // Center vertically in the main area
+            maxWidth: "1200px",
+            margin: "0 auto",
+            width: "100%",
+            paddingBottom: "4rem", 
+        },
+        // --- Left Column (Call to Action) ---
+        ctaColumn: {
+            flex: "1 1 50%",
+            minWidth: "300px",
+            textAlign: "left",
+            marginBottom: "3rem",
+        },
+        ctaHeading: {
+            fontSize: "3rem", 
+            fontWeight: 700,
+            lineHeight: 1.1,
+            marginBottom: "1.5rem",
+        },
+        emailLinkStyle: {
+            display: "inline-block",
+            textDecoration: "none",
+            color: colors.textPrimary,
+            border: `1px solid ${colors.textPrimary}`,
+            borderRadius: "50px", 
+            padding: "0.75rem 1.5rem",
+            fontSize: "1rem",
+        },
+        // --- Right Column (Personal Message/Links) ---
+        detailsColumn: {
+            flex: "1 1 50%",
+            minWidth: "300px",
+            textAlign: "left",
+            paddingLeft: "2rem",
+        },
+        detailsSubHeading: {
+            fontSize: "3rem",
+            fontWeight: 700,
+            lineHeight: 1.1,
+            color: colors.textPrimary,
+            marginBottom: "1rem",
+        },
+        detailText: {
+            fontSize: "1.1rem",
+            color: colors.textSecondary,
+            lineHeight: 1.6,
+        },
+        // --- Footer Section ---
+        footer: {
+            borderTop: `1px solid ${colors.textSecondary}`,
+            paddingTop: "1.5rem",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            maxWidth: "1200px",
+            margin: "0 auto",
+            width: "100%",
+            paddingBottom: "1rem",
+        },
+        footerLeft: {
+            display: "flex",
+            alignItems: "center",
+            fontSize: "0.85rem",
+        },
+        footerLink: {
+            color: colors.textSecondary,
+            textDecoration: "none",
+            margin: "0 10px",
+            transition: "color 0.3s",
+        },
+        dotSeparator: {
+            width: "5px",
+            height: "5px",
+            backgroundColor: colors.textSecondary,
+            borderRadius: "50%",
+            margin: "0 5px",
+        },
+        socialLinks: {
+            display: "flex",
+            gap: "1rem",
+            fontSize: "1.2rem",
+        },
+        socialIcon: {
+            color: colors.textPrimary,
+        },
+        // Media query for stacking columns on mobile
+        '@media (maxWidth: 768px)': {
+            mainContent: { flexDirection: 'column' },
+            ctaColumn: { textAlign: 'center', marginBottom: '2rem' },
+            detailsColumn: { textAlign: 'center', paddingLeft: '0' },
+            footer: { flexDirection: 'column', gap: '1rem' },
+        }
+    };
+
+    return (
+        <section style={styles.wrapper} id="contact">
+            {/* Main Content Area */}
+            <div style={styles.mainContent}>
+                
+                {/* Left Column - Call to Action (Mishal's Contact) */}
+                <div style={styles.ctaColumn}>
+                    <motion.h2
+                        style={styles.ctaHeading}
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        Ready to <br /> Connect ?
+                    </motion.h2>
+                    
+                    <motion.a
+                        href={`mailto:${personalDetails.email}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={styles.emailLinkStyle}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        whileHover={{ 
+                            backgroundColor: colors.textPrimary, 
+                            color: colors.bgPrimary,
+                            transition: { duration: 0.3 }
+                        }}
+                    >
+                        <FaEnvelope style={{ marginRight: '8px' }} /> {personalDetails.email}
+                    </motion.a>
+                </div>
+
+                {/* Right Column - Personal Message/CTA */}
+                <div style={styles.detailsColumn}>
+                    <motion.h2
+                        style={styles.detailsSubHeading}
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        Let's build <br /> something great
+                    </motion.h2>
+                    
+                    <motion.p
+                        style={styles.detailText}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                    >
+                        As a fresher, I'm eager to discuss new project ideas, job opportunities, 
+                        or even just technologies. Reach out—I respond quickly!
+                    </motion.p>
+                </div>
+            </div>
+
+            {/* Footer Section (Includes Socials) */}
+            <div style={styles.footer}>
+                <div style={styles.footerLeft}>
+                    {/* Using your desired footer links */}
+                    <a href="#projects" style={styles.footerLink}>PROJECTS</a>
+                    <div style={styles.dotSeparator}></div>
+                    <a href="#about" style={styles.footerLink}>ABOUT ME</a>
+                </div>
+
+                <div style={styles.socialLinks}>
+                    {personalDetails.socials.map((social, idx) => (
+                        <motion.a
+                            key={idx}
+                            href={social.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={styles.socialIcon}
+                            whileHover={{ scale: 1.2, color: colors.textSecondary }}
+                            transition={{ type: "spring", stiffness: 400 }}
+                        >
+                            {social.icon}
+                        </motion.a>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
