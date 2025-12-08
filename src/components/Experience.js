@@ -1,6 +1,6 @@
 'use client';
 import React from "react";
-import { motion, useViewportScroll } from "framer-motion";
+import { motion } from "framer-motion";
 
 const experiences = [
   {
@@ -9,7 +9,8 @@ const experiences = [
     company: "Digitdefence.com",
     companyUrl: "https://digitdefence.com",
     companyColor: "#3B82F6",
-    description: "Worked on cybersecurity domains including vulnerability assessment, incident response, and ethical hacking"  },
+    description: "Worked on cybersecurity domains including vulnerability assessment, incident response, and ethical hacking",
+  },
   {
     date: "Feb 2025 - June 2025",
     title: "Cyber Security Analyst Intern",
@@ -30,6 +31,7 @@ const experiences = [
   },
 ];
 
+// --- Particle Component ---
 const Particle = ({ size = "8px", color = "#3B82F6", x = "0%", y = "0%", duration = 5, delay = 0 }) => (
   <motion.div
     style={{
@@ -59,8 +61,6 @@ const Particle = ({ size = "8px", color = "#3B82F6", x = "0%", y = "0%", duratio
 );
 
 const Experience = () => {
-  const { scrollYProgress } = useViewportScroll();
-
   const particleConfigs = Array.from({ length: 12 }).map(() => ({
     size: `${Math.random() * 10 + 4}px`,
     color: ["#00c3ff", "#ff3d67", "#00ff7f", "#ffaa00", "#ffffff"][Math.floor(Math.random() * 5)],
@@ -71,7 +71,16 @@ const Experience = () => {
   }));
 
   return (
-    <section id="Experience" style={{ position: "relative", background: "#111111ff", color: "#fff", padding: "4rem 2rem", overflow: "hidden" }}>
+    <section
+      id="experience"
+      style={{
+        position: "relative",
+        background: "#111111ff",
+        color: "#fff",
+        padding: "4rem 2rem",
+        overflow: "hidden"
+      }}
+    >
       {particleConfigs.map((p, i) => <Particle key={i} {...p} />)}
 
       <motion.div
@@ -107,7 +116,6 @@ const Experience = () => {
               overflow: "hidden",
             }}
           >
-            {/* Animated line */}
             <motion.div
               initial={{ width: 0 }}
               whileHover={{ width: "100%" }}
@@ -123,7 +131,12 @@ const Experience = () => {
 
             <p style={{ color: exp.companyColor, fontWeight: 600, fontSize: "0.9rem", marginBottom: "0.3rem" }}>{exp.date}</p>
             <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "0.5rem" }}>{exp.title}</h3>
-            <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: "1rem", fontWeight: 500, marginBottom: "0.5rem", color: exp.companyColor, textDecoration: "underline" }}>
+            <a
+              href={exp.companyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ fontSize: "1rem", fontWeight: 500, marginBottom: "0.5rem", color: exp.companyColor, textDecoration: "underline" }}
+            >
               {exp.company}
             </a>
             <p style={{ fontSize: "0.95rem", color: "#ccc", lineHeight: 1.6 }}>{exp.description}</p>
