@@ -19,7 +19,7 @@ const AboutMe = () => {
       if (index === fullText.length) clearInterval(interval);
     }, TYPING_SPEED);
     return () => clearInterval(interval);
-  }, []);
+  }, [fullText]);
 
   return (
     <section id="about" style={styles.section}>
