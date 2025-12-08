@@ -1,0 +1,36 @@
+/* ===== CSS Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+}
+
+/* ===== Global Layout ===== */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background-color: #04021a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+
+/* Prevent vertical scroll bounce on mobile */
+body {
+  overscroll-behavior-y: none;
+}
+
+/* Anchor tag default reset */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Style for code blocks */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
