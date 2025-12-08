@@ -17,13 +17,6 @@ const appStyles = {
   overflowX: 'hidden',
 };
 
-const appStyles = {
-  backgroundColor: '#04021a',
-  minHeight: '100vh',
-  paddingTop: '64px',      // offset for fixed navbar
-  overflowX: 'hidden',     // prevent horizontal scroll
-};
-
 
 function App() {
   return (
