@@ -62,7 +62,7 @@ const SubheadingCycler = ({ scrollYProgress }) => {
   useEffect(() => {
     const timer = setInterval(() => setIndex(prev => (prev + 1) % roles.length), TIMING.SUBHEADING_CYCLE_INTERVAL);
     return () => clearInterval(timer);
-  }, []);
+  }, [roles.length]);
 
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
