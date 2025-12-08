@@ -2,14 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
+// ✅ Constant text outside the component
+const fullText = `Hi, I’m Mishal V S, a Computer Science & Engineering graduate from St. Joseph Engineering College, Mangalore. I’m an aspiring Cybersecurity Analyst with hands-on experience in vulnerability assessment, penetration testing, and SOC operations. I’ve completed internships at Digitdefence.com and EyeQDotNet Pvt Ltd, gaining exposure to ethical hacking, threat detection, and incident response. I’m skilled in Python, Solidity, Web3.js, and security tools like Burp Suite, Nmap, Metasploit, Wireshark, OWASP ZAP, and OpenVAS. I’m passionate about building secure systems and contributing to proactive defense initiatives in cybersecurity.`;
+
+const pdfUrl = "/Resume- Mishal V S.pdf";
+const TYPING_SPEED = 30;
+
 const AboutMe = () => {
   const [typedText, setTypedText] = useState("");
   const [showPdf, setShowPdf] = useState(false);
-
-  const fullText = `Hi, I’m Mishal V S, a Computer Science & Engineering graduate from St. Joseph Engineering College, Mangalore. I’m an aspiring Cybersecurity Analyst with hands-on experience in vulnerability assessment, penetration testing, and SOC operations. I’ve completed internships at Digitdefence.com and EyeQDotNet Pvt Ltd, gaining exposure to ethical hacking, threat detection, and incident response. I’m skilled in Python, Solidity, Web3.js, and security tools like Burp Suite, Nmap, Metasploit, Wireshark, OWASP ZAP, and OpenVAS. I’m passionate about building secure systems and contributing to proactive defense initiatives in cybersecurity.`;
-
-  const pdfUrl = "/Resume- Mishal V S.pdf";
-  const TYPING_SPEED = 30;
 
   useEffect(() => {
     let index = 0;
@@ -19,7 +20,7 @@ const AboutMe = () => {
       if (index === fullText.length) clearInterval(interval);
     }, TYPING_SPEED);
     return () => clearInterval(interval);
-  }, [fullText]);
+  }, []); // ✅ Empty dependency array
 
   return (
     <section id="about" style={styles.section}>
