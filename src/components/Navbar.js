@@ -1,22 +1,33 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import { AiFillHome, AiOutlineUser, AiOutlineBook, AiOutlineExperiment, AiOutlineProject, AiOutlineMail } from 'react-icons/ai';
+import React, { useState, useEffect, useMemo } from 'react';
+import {
+  AiFillHome,
+  AiOutlineUser,
+  AiOutlineBook,
+  AiOutlineExperiment,
+  AiOutlineProject,
+  AiOutlineMail,
+} from 'react-icons/ai';
 
 const Navbar = () => {
   const [active, setActive] = useState('home');
   const [mobile, setMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
   const [open, setOpen] = useState(false);
 
-  const navItems = [
-    { name: 'Home', icon: <AiFillHome /> },
-    { name: 'About', icon: <AiOutlineUser /> },
-    { name: 'Education', icon: <AiOutlineBook /> },
-    { name: 'Projects', icon: <AiOutlineProject /> },
-    { name: 'Experience', icon: <AiOutlineExperiment /> },
-    { name: 'Contact', icon: <AiOutlineMail /> },
-  ];
+  // ✅ navItems wrapped in useMemo to avoid re-creation each render
+  const navItems = useMemo(
+    () => [
+      { name: 'Home', icon: <AiFillHome /> },
+      { name: 'About', icon: <AiOutlineUser /> },
+      { name: 'Education', icon: <AiOutlineBook /> },
+      { name: 'Projects', icon: <AiOutlineProject /> },
+      { name: 'Experience', icon: <AiOutlineExperiment /> },
+      { name: 'Contact', icon: <AiOutlineMail /> },
+    ],
+    []
+  );
 
-  // Handle mobile resize
+  // Handle window resize for mobile detection
   useEffect(() => {
     const onResize = () => setMobile(window.innerWidth <= 768);
     window.addEventListener('resize', onResize);
@@ -50,6 +61,15 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [navItems]);
 
+  // Scroll to section on click
+  const handleClick = (name) => {
+    setActive(name.toLowerCase());
+    const section = document.getElementById(name.toLowerCase());
+    if (section) section.scrollIntoView({ behavior: 'smooth' });
+    if (mobile) setOpen(false);
+  };
+
+  // --- Styles ---
   const s = {
     nav: {
       display: 'flex',
@@ -121,17 +141,12 @@ const Navbar = () => {
     }),
   };
 
-  const handleClick = (name) => {
-    setActive(name.toLowerCase());
-    const section = document.getElementById(name.toLowerCase());
-    if (section) section.scrollIntoView({ behavior: 'smooth' });
-    if (mobile) setOpen(false);
-  };
-
   return (
     <>
+      {/* Overlay */}
       <div style={s.overlay} onClick={() => setOpen(false)} role="presentation" />
 
+      {/* Burger menu */}
       <div
         style={s.burger}
         onClick={() => setOpen(!open)}
@@ -145,6 +160,7 @@ const Navbar = () => {
         <span style={{ ...s.bar, top: 16, transform: open ? 'rotate(-45deg) translate(5px, -5px)' : 'none' }} />
       </div>
 
+      {/* Navigation */}
       <nav style={s.nav}>
         <ul style={s.list}>
           {navItems.map((item) => (
