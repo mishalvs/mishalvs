@@ -11,8 +11,8 @@ const Navbar = () => {
     { name: 'Home', icon: <AiFillHome /> },
     { name: 'About', icon: <AiOutlineUser /> },
     { name: 'Education', icon: <AiOutlineBook /> },
-    { name: 'Experience', icon: <AiOutlineExperiment /> },
     { name: 'Projects', icon: <AiOutlineProject /> },
+    { name: 'Experience', icon: <AiOutlineExperiment /> },
     { name: 'Contact', icon: <AiOutlineMail /> },
   ];
 
